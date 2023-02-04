@@ -1,0 +1,208 @@
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+nav {
+  background-color: #C12127;
+  color: rgba(255,255,255,0.8);
+  height:20px;
+  padding: 10px 10px 10px 10px;
+
+  /*padding:25px 50px 75px 100px;
+padding superior es 25px
+padding derecho es 50px
+padding bajo es 75px
+padding izquierdo es 100px
+*/
+  font-family: 'Source Sans Pro', 'Lucida Grande', sans-serif;
+  font-size: 14px;
+}
+
+nav a {
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+}
+
+.top-left{
+  float:left;
+  
+}
+
+.top-links {
+  display: inline-block;
+  float: right;
+  margin: 0 20px 0 0;
+  padding-top:3px;
+  
+}
+
+.top-links li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+#header{
+  width:100%;
+  height:400px;
+  color:white;
+background-image: url("images/city-scape.svg");
+
+}
+
+#content-header{
+ width:900px;
+ float:right;
+ padding-top:90px;
+}
+
+#button-header{
+  background-color:#f09233;
+  border-radius: 20px;
+  padding:8px;
+  margin-top:10px;
+  float:left;
+}
+
+.form-search{
+  width:1200px;
+  padding-top: 1px;
+}
+
+#search-text{
+  width:1000px;
+  height: 40px;
+  padding-left: 10px;
+  background-color: rgb(31, 82, 111);
+  border:1px;
+  color:white;
+}
+
+#btn-search{
+  width:50px;
+  height:100px;
+}
+
+
+#npmlogo{
+  float:left;
+  width:100px;
+  height: 50px;
+}
+
+#signup{
+  float:right;
+  width:130px;
+  height: 50px;
+  padding-top:10px;
+  font-size: 18px;
+  text-decoration: none;
+  color:white;
+}
+
+#bearlogo{
+  float:right;
+  padding-right:1px;
+  height: 50px;
+}
+
+#first{
+  background-color: rgb(39, 53, 71);
+  color:white;
+  height:400px;
+}
+
+#collaboration{
+width:400px;
+float:left;
+padding-left:430px;
+padding-top: 70px;
+padding-right:20px;
+}
+
+#title-first{
+font-size: 24px;
+padding-top: 70px;
+}
+
+#list-first{
+width:550px;
+float:right;
+}
+
+#list-first li{
+  margin-top:4px;
+}
+
+#button-first{
+  background-color:rgb(203, 56, 55);
+  border-radius: 20px;
+  padding:8px;
+  margin-top:10px;
+  float:left;
+}
+
+#learn-more{
+  float:left;
+  padding-top:10px;
+  width:500px;
+}
+
+#second{
+  background-image: url("images/forklift.svg");
+  background-size: cover;
+  height:400px;
+}
+
+#button-second{
+  background-color:rgb(49, 68, 88);
+  border-radius: 20px;
+  padding:12px;
+  margin-top:10px;
+  float:left;
+
+}
+
+#second-content{
+  float:left;
+  padding-top:100px;
+  padding-left:150px;
+  color:white;
+}
+
+#third{
+  height:500px;
+  margin: 0 auto
+}
+
+#third-tittle{
+
+}
+
+#third-content{
+  margin: 0 auto
+
+}
+
+#third-tittle{
+  text-align: center;
+  padding-top:35px;
+  padding-bottom: 20px;
+}
+#find{
+  margin: 0 auto;
+}
+
+#discover{
+  margin: 0 auto
+}
+
+#find, #discover, #build{
+  padding:0px;
+  float:left;
+  Width: 32%;
+  text-align: center;
+
+}
