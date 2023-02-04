@@ -1,0 +1,153 @@
+
+{{> menu}}
+
+
+<h2>Evolution</h2>
+
+
+From: <input id="datefrom" value="2019-01-01" type="date" name="from"> To:<input id="dateto" type="date" name="to" value="2019-12-31">
+ <select id="disciplina">
+    <option value="dominadas">Dominadas</option>
+    <option value="pressBanca">Press Banca</option>
+    <option value="pressMilitar">Press Militar</option>
+    <option value="sentadilla">Sentadilla</option>
+    <option value="pesomuerto">Peso muerto</option>
+    <option value="velocidad">Velocidad</option>
+    <option value="resistencia">Resistencia Muscular</option>
+    <option value="aerobica">Resistencia Aerobica</option>
+    <option value="peso">Peso</option>
+  </select>
+
+<button id="dates">Aceptar</button>
+
+
+<canvas id="chart" width="400" height="100"></canvas>
+
+
+
+<script>
+const button = document.getElementById('dates')
+
+  var array1 = [];
+  var array2 = [];
+button.onclick = ()=>{
+
+ 
+
+  let leyenda = ""
+
+  const dateFrom = document.getElementById('datefrom').value
+  const dateTo = document.getElementById('dateto').value
+  const disciplina = document.getElementById('disciplina').value
+
+let newDateTo = dateTo + " 23:59:59"
+
+axios.get(`/info?dateto=${newDateTo}&datefrom=${dateFrom}&disciplina=${disciplina}`)
+.then((data)=>{
+
+  let datos = data.data
+   
+ let array1 = []
+ let array2 = []
+ let limite = []
+ 
+
+  if(datos.weight == undefined){
+
+  
+datos.forEach(elemento =>{
+
+if(Object.keys(elemento.ejercise)[0] == "aerobica"){
+  if(elemento.ejercise[disciplina][1] == 5){ 
+    array1.push(elemento.ejercise[disciplina][0])
+    array2.push(elemento.date.split("T")[0])
+    leyenda = "Tiempo"
+  } 
+}
+
+if(Object.keys(elemento.ejercise)[0] == "velocidad"){
+  if(elemento.ejercise[disciplina][1] == 100){ 
+    array1.push(elemento.ejercise[disciplina][0])
+    array2.push(elemento.date.split("T")[0])
+    leyenda = "Tiempo"
+  } 
+}
+
+if(Object.keys(elemento.ejercise)[0] === "resistencia" && elemento.ejercise[disciplina][0] == 5){
+  array1.push(elemento.ejercise[disciplina][1])
+  array2.push(elemento.date.split("T")[0])
+  leyenda = "Repeticiones"
+}
+
+if( Object.keys(elemento.ejercise)[0] === "dominadas"){
+   array1.push(parseInt(elemento.ejercise[disciplina][1]))
+array2.push(elemento.date.split("T")[0]) 
+}
+
+if( (Object.keys(elemento.ejercise)[0] === "pressBanca" ||
+  Object.keys(elemento.ejercise)[0] === "pressMilitar" ||
+  Object.keys(elemento.ejercise)[0] === "sentadilla" ||
+  Object.keys(elemento.ejercise)[0] === "pesomuerto")
+   ){
+ array1.push(parseInt(elemento.ejercise[disciplina][0]))
+array2.push(elemento.date.split("T")[0]) 
+    leyenda = "Peso Max"
+   }
+
+
+})
+  } else {
+console.log("asdffffff")
+    data.data.weight.forEach(elemento=>{
+      array1.push(elemento.weight)
+      array2.push(elemento.date)
+      limite.push(75)
+    })
+
+  }
+
+
+
+pintarChart(array1,array2,limite)
+
+})
+.catch((err)=>{
+  console.log(err)
+})
+
+function pintarChart(array1,array2,limite){
+
+var ctx = document.getElementById("chart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+   data: {
+    labels: array2,
+    datasets: [{ 
+        data: array1,
+        label: "Peso",
+        borderColor: "#3e95cd",
+        fill: false
+      }
+    ]
+  },
+    
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+}
+}
+
+
+
+</script>
+
+
+
+

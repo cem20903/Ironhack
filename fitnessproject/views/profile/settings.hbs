@@ -1,0 +1,33 @@
+{{> menu}}
+
+<h1>PROFILE</h1>
+
+
+<form method="POST" action="/profile/update">
+  <p>Weight: <input type="text" name="weight" id="weight" value={{this.weight}} />   <button id="updateWeight">Update Weight</button> </p>
+ </p>
+  <p>Goal weight: <input type="text" name="goalWeight" id="goalWeight" value={{this.goalWeight}} /> 
+  <button id="updateGoalWeight">Update Goal</button> </p>
+  <p><input type="hidden" id="dateActualWeight" value={{this.dateActualWeight}}></p>
+</form>
+
+
+
+<div id="goals"></div>
+<div id="calendario"></div>
+<script>
+
+ 
+
+
+
+
+
+  window.onload = () => {
+  let weight = document.getElementById('weight')
+  let goalWeight = document.getElementById('goalWeight')
+  let buttonWeight = document.getElementById('updateWeight')
+
+  }
+
+</script>

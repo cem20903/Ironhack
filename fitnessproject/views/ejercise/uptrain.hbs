@@ -1,0 +1,125 @@
+{{> menu}}
+
+
+    
+<form action="/add-train" method="POST" id="formAdd">
+
+<input type="date" name="date" id="date">
+ <div class="row" id="selectEjercise">
+   
+  <select id="ejercise" class="btn-block">
+    <option value="dominadas">Dominadas</option>
+    <option value="pressBanca">Press Banca</option>
+    <option value="pressMilitar">Press Militar</option>
+    <option value="sentadilla">Sentadilla</option>
+    <option value="pesomuerto">Peso muerto</option>
+    <option value="velocidad">Velocidad</option>
+    <option value="flexionesR">Flexiones (R)</option>
+     <option value="sentadillasR">Sentadillas (R)</option>
+    <option value="aerobica">Resistencia Aerobica</option>
+
+  </select>
+  </div>
+<button type="button" name="insert" id="insert" value="Insert" class="btn btn-secondary btn-lg btn-block">Insert</button>
+<button type="submit" value="Send" id="send" class="btn btn-secondary btn-lg btn-block">Send</button>
+
+
+</form>
+<script>
+
+
+  
+  const select = document.getElementById('ejercise')
+  const insert = document.getElementById('insert')
+  const formAdd = document.getElementById('formAdd')
+
+  let date = document.getElementById('date')
+  date.value = new Date().toISOString().slice(0,10);
+
+  //let date = document.getElementById('date')
+  //const todayDate = new Date().toISOString().slice(0,10);
+  //date.defaultValue = todayDate 
+
+  insert.addEventListener('click', (e) => {
+
+    let inputs = document.getElementsByTagName('input')
+
+    let title = document.createElement('p')
+    let titleText = select.value.charAt(0).toUpperCase() + select.value.slice(1)
+    title.innerHTML = `<h3 class="titleEj">${titleText}</h3>`
+    title.name = select.value
+    formAdd.appendChild(title)
+    let parameter1 = document.createElement('input')
+    parameter1.className = "form-control form-control-lg "
+    parameter1.value = 0
+    //parameter1.className = select.value
+//esto select.value + String(inputs.length-1)
+     parameter1.name = select.value
+   
+    parameter1.size = 3
+
+    let repText = document.createElement('strong')
+
+    parameter1.className += "peso"
+    let repes = document.createElement('input')
+    //repes.className = select.value 
+    repes.className = "form-control form-control-lg "
+    repes.name = select.value
+    repes.value = 0
+     let nameParameter1 = document.createElement('strong')
+
+    if (select.value === "velocidad") {
+
+      let nameParameter1 = document.createElement('strong')
+      nameParameter1.innerHTML = "Tiempo (En segundos):  "
+      formAdd.appendChild(nameParameter1)
+      parameter1.className += "form-control form-control-lg "
+      parameter1.className += "tiempo"
+      formAdd.appendChild(parameter1)
+      repText.innerHTML = " Metros: "
+      formAdd.appendChild(repText)
+      formAdd.appendChild(repes)
+
+    } else if (select.value === "aerobica") {
+
+       let advice = document.createElement('strong')
+      advice.innerHTML = "<p>Formato XX:XX, correr mas de 1 hora hace llorar al niño jesus</p>"
+      let nameParameter1 = document.createElement('strong')
+      nameParameter1.innerHTML = "Tiempo: "
+      formAdd.appendChild(nameParameter1)
+      parameter1.className = "form-control form-control-lg "
+      parameter1.className += "tiempo"
+      parameter1.name = "aerobica" + String(inputs.length-2)
+      formAdd.appendChild(parameter1)
+     repes.className += "form-control form-control-lg "
+
+      repText.innerHTML = " Kilometros: "
+      formAdd.appendChild(repText)
+      formAdd.appendChild(repes)
+      formAdd.appendChild(advice)
+
+    } else {
+     
+      nameParameter1.innerHTML = "Peso: "
+      repes.className += "form-control form-control-lg "
+      repes.className += "repeticiones"
+      repes.name = select.value 
+      repes.size = 10
+      repText.innerHTML = " Repeticiones: "
+      formAdd.appendChild(nameParameter1)
+      formAdd.appendChild(parameter1)
+      formAdd.appendChild(repText)
+      formAdd.appendChild(repes)
+
+    }
+
+
+  if (select.value === "resistencia") {
+
+    nameParameter1.innerHTML = "Tiempo: "
+  }
+
+  })
+
+
+</script>

@@ -1,0 +1,63 @@
+{{> menu}}
+
+<h1>RANKINGS</h1>
+<select id="rankingSelector" onchange="findGroup()">
+  <option id="gobal" value="global">global</option>
+  {{#each groups}}
+    <option id="{{this._id}}" value="{{this._id}}">{{this.name}}</option>
+  {{/each}}
+</select>
+<select id="ejercise" onchange="findGroup()">
+  <option value="dominadas">Dominadas</option>
+  <option value="pressBanca">Press Banca</option>
+  <option value="pressMilitar">Press Militar</option>
+  <option value="sentadilla">Sentadilla</option>
+  <option value="pesomuerto">Peso muerto</option>
+  <option value="velocidad">Velocidad</option>
+  <option value="resistencia">Resistencia Muscular</option>
+  <option value="aerobica">Resistencia Aerobica</option>
+</select>
+<div id="ranking">
+
+</div>
+<script>
+  function findGroup(){
+    let selG = document.getElementById('rankingSelector')
+    let selE = document.getElementById('ejercise')
+    let groupId = selG.value;
+    let ejType = selE.value;
+    axios.get(`/profile/searchRanking?id=${groupId}&type=${ejType}`)
+    .then((data)=>{
+      console.log(data.data)
+      const datos = data.data
+      let form = document.getElementById('ranking')
+      while (form.lastChild) {
+        form.removeChild(form.lastChild);
+      }
+ let ul = document.createElement("ul")
+ ul.className = "list-group"
+      let liPrin = document.createElement('li')
+    
+      liPrin.className = "list-group-item active"
+      liPrin.innerText = "Ranking"
+      ul.appendChild(liPrin)
+      for(var i=0;i < data.data.length;i++){
+
+       
+        
+        let name = document.createElement("li")
+        name.className = "list-group-item"
+        let nota = document.createElement("div")
+        name.innerHTML = "<strong>Usuario:</strong> " + data.data[i].name + " | <strong>Peso:</strong> " + data.data[i].ejer[0]
+        nota.innerText = data.data[i].ejer[0]
+        //form.appendChild(div)
+        ul.appendChild(name)
+        form.appendChild(ul)
+        //form.appendChild(nota)
+      }
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
+</script>
